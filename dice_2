@@ -6,7 +6,8 @@ def roll() :
   max = 6
 
   print ("Sum of values is....")
-  k = print (random.randint(min, max)+random.randint(min, max))
+  k = random.randint(min, max)+random.randint(min, max)
+  print(k)
 
   return k
 
