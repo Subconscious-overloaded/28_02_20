@@ -4,7 +4,7 @@ max = 6
 
 roll = "yes"
 
-while roll == "yes" or roll_again == "y":
+while roll == "yes" or roll == "y":
     print ("Rolling...")
     print ("Dice value is....")
     print (random.randint(min, max))
