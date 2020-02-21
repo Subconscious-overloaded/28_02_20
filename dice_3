@@ -1,0 +1,25 @@
+    
+import random
+import matplotlib.pyplot as plt
+
+
+def roll() : 
+  min = 1
+  max = 6
+
+  print ("Sum of values is....")
+  k = random.randint(min, max)+random.randint(min, max) 
+  print(k)
+
+  return k
+
+j = []
+for i in range(20) :
+  
+  j.append(roll())
+
+
+fig = plt.figure(figsize=(10, 8))
+ax = fig.add_subplot(111)  
+ax.plot(j)
+fig.savefig('graph.png')
