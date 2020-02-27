@@ -1,0 +1,19 @@
+my_dict = {'name':'Hager', 'year': 2020 , 'address': ['Obernai',67000] }
+
+
+print(my_dict['name'])
+print(my_dict.get('year'))
+print(my_dict.get('address'))
+
+a = my_dict.get('address') 
+print('City:',a[0])
+print('Code:',a[1])
+
+print(my_dict.get('NextL2'))
+
+try:
+  name = my_dict['NextL2']
+except: 
+  print('Unknown')
+
+name = my_dict['NextL2']
