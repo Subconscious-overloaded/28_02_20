@@ -1,0 +1,24 @@
+import numpy as np
+import simpleaudio as sa
+from scipy.io.wavfile import read
+
+
+a = read("ss.wav")
+np.array(a[1],dtype=np.int16)
+b = a[1]
+c = b[:,1]
+c = c.copy(order='C')
+d = c.copy(order='C')
+c = c /  np.max(np.abs(c))
+c = np.convolve(c,np.linspace(0.9, 0.1 , num=20))
+
+c = np.int16 (c * (2**15 - 1) / np.max(np.abs(c)))
+
+# Start playback
+fs = 48000
+#original 
+play_obj = sa.play_buffer(d, 1, 2, fs)
+play_obj.wait_done()
+#reverbrate
+play_obj = sa.play_buffer(c, 1, 2, fs)
+play_obj.wait_done()
