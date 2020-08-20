@@ -1,0 +1,55 @@
+import matplotlib.pyplot as plt
+from scipy import ndimage
+
+
+
+afdd=plt.imread('afdd.jpg')
+
+rgb_weights = [0.33, 0.33, 0.33]
+
+grayscale_afdd = np.dot(afdd[...,:3], rgb_weights)
+
+filter1 = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+filter2 = filter1.T
+a1 = ndimage.convolve(grayscale_afdd, filter1, mode='constant', cval=0.0)
+a2 = ndimage.convolve(grayscale_afdd, filter2, mode='constant', cval=0.0)
+
+
+# plt.subplot(311)
+plt.figure(1)
+plt.imshow(grayscale_afdd,cmap='gray')
+plt.title("Gray")
+# plt.subplot(312)
+plt.figure(2)
+plt.imshow(a1,cmap='gray')
+plt.title("Vertical")
+# plt.subplot(313)
+plt.figure(3)
+plt.imshow(a2,cmap='gray')
+plt.title("Horizontal")
+
+
+gradient_magnitude = np.sqrt(np.square(a1) + np.square(a2))
+
+# gradient_magnitude *= 255.0 / gradient_magnitude.max()
+
+plt.figure(4)
+plt.imshow(gradient_magnitude, cmap='gray')
+plt.title("Filtered")
+
+
+
+
+sobel_filter =  np.sqrt( np.square(ndimage.sobel(grayscale_afdd,0)) + np.square( ndimage.sobel(grayscale_afdd,1)))
+
+plt.figure(5)
+plt.imshow(sobel_filter, cmap='gray')
+plt.title("Filtered lib")
+
+
+
+plt.figure(6)
+
+plt.imshow(sobel_filter-gradient_magnitude, cmap='gray')
+plt.title("Diff")
+
